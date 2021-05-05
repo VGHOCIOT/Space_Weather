@@ -4,24 +4,48 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "start-web": "react-scripts start",
-    "build-web": "react-scripts build",
+    "web": "expo start --web",
     "eject": "expo eject"
   },
   "dependencies": {
+    "@freakycoder/react-native-bounceable": "^0.2.5",
+    "@paraboly/react-native-card": "Paraboly/react-native-card#expo",
+    "@react-native-community/masked-view": "0.1.10",
+    "@react-navigation/native": "^5.9.4",
+    "@react-navigation/stack": "^5.14.4",
+    "asyncstorage-down": "^4.2.0",
+    "buffer": "^6.0.3",
+    "dotenv": "^8.2.0",
     "expo": "~41.0.1",
+    "expo-linear-gradient": "~9.1.0",
+    "expo-location": "~12.0.4",
+    "expo-permissions": "~12.0.1",
     "expo-status-bar": "~1.0.4",
+    "fs": "0.0.1-security",
+    "https-browserify": "0.0.1",
+    "invariant": "^2.2.4",
     "react": "16.13.1",
     "react-art": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
+    "react-native-crypto": "^2.2.0",
+    "react-native-elements": "^3.4.1",
+    "react-native-gesture-handler": "~1.10.2",
+    "react-native-level-fs": "^3.0.1",
+    "react-native-randombytes": "^3.6.1",
+    "react-native-reanimated": "~2.1.0",
+    "react-native-safe-area-context": "^3.2.0",
+    "react-native-screens": "~3.0.0",
     "react-native-web": "^0.16.1",
     "react-router-dom": "^5.2.0",
     "react-router-native": "^5.2.0",
-    "react-scripts": "^4.0.3"
+    "react-scripts": "^4.0.3",
+    "rn-nodeify": "^10.3.0",
+    "stream": "^0.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0"
+    "@babel/core": "^7.9.0",
+    "path": "^0.12.7"
   },
   "private": true,
   "browserslist": {
@@ -35,5 +59,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "react-native": {
+    "crypto": "react-native-crypto",
+    "https": "https-browserify",
+    "fs": "react-native-level-fs"
+  },
+  "browser": {
+    "crypto": "react-native-crypto",
+    "https": "https-browserify",
+    "fs": "react-native-level-fs"
   }
 }

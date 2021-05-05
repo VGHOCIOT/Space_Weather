@@ -1,13 +1,36 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import { BrowserRouter, Route } from "react-router-dom";
+import Home from "./components/Home";
+import NasaPhoto from "./components/NasaPhoto";
+import EarthWeather from "./components/EarthWeather";
+import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer >
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{title: 'Welcome'}}
+        />
+        <Stack.Screen
+          // style={styles.container}
+          name="NasaPhoto"
+          component={NasaPhoto}
+        />
+        <Stack.Screen
+          name="EarthWeather"
+          component={EarthWeather}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -19,3 +42,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default App;
