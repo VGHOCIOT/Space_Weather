@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import {REACT_APP_NASA_KEY} from '@env';
 
 const NasaPhoto = ({ navigation }) => {
     const [photoData, setPhotoData] = useState(null);
-    const apiKey = process.env.REACT_APP_NASA_KEY;
+    // const apiKey = process.env.REACT_APP_NASA_KEY;
 
 
     useEffect(() => {
@@ -11,7 +12,7 @@ const NasaPhoto = ({ navigation }) => {
 
         async function fetchPhoto() {
             const res = await fetch (
-                `https://api.nasa.gov/planetary/apod?api_key=`
+                `https://api.nasa.gov/planetary/apod?api_key=${REACT_APP_NASA_KEY}`
             );
             const data = await res.json();
             setPhotoData(data);

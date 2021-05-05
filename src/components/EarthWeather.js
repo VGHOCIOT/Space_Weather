@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as Location from 'expo-location';
 import { View, FlatList, Text } from 'react-native';
 import WeatherCard from './WeatherCard';
+import {REACT_APP_WEATHER_API_KEY} from '@env';
 
 export default class EarthWeather extends Component {
     constructor(props){
@@ -37,7 +38,7 @@ export default class EarthWeather extends Component {
     }
 
     getWeather(){
-        let url = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + this.state.lat + '&lon=' + this.state.long + '&units=metric&appid='
+        let url = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + this.state.lat + '&lon=' + this.state.long + `&units=metric&appid=${REACT_APP_WEATHER_API_KEY}`
         fetch(url)
         .then(response => response.json())
         .then(data =>{
