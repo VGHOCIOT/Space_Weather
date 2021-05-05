@@ -37,7 +37,7 @@ export default class EarthWeather extends Component {
     }
 
     getWeather(){
-        let url = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + this.state.lat + '&lon=' + this.state.long + '&units=metric&appid=4304d38d675e19f669762e228634c7ef'
+        let url = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + this.state.lat + '&lon=' + this.state.long + '&units=metric&appid='
         fetch(url)
         .then(response => response.json())
         .then(data =>{
