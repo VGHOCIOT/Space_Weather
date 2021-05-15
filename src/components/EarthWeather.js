@@ -25,7 +25,7 @@ export default class EarthWeather extends Component {
         let { status } = await Location.requestForegroundPermissionsAsync();
 
         if(status !== 'granted'){
-            console.log('here')
+            // console.log('here')
             this.setState({
                 error: 'Permission denied'
             })
