@@ -39,7 +39,7 @@ export const renderIndicator = (
                 style={[
                     styles.indicator,
                     indicatorStyle,
-                    currentIndex === i 
+                    i === currentIndex 
                     ? indicatorActiveColor 
                         ? {...styles.active,
                            ...{
@@ -56,6 +56,7 @@ export const renderIndicator = (
             />,
         )
     }
+    return indicators
 }
 
 const styles = StyleSheet.create({
@@ -69,9 +70,12 @@ const styles = StyleSheet.create({
       height: 6,
       borderRadius: 3,
       marginRight: 5,
+    //   color: '#ffffff'
     },
     active: {},
-    inactive: {},
+    inactive: {
+        backgroundColor: '#bdc3c7'
+    },
   });
 
   export default Indicator;

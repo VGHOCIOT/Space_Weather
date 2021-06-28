@@ -161,10 +161,7 @@ export default class SignUp extends Component {
                     style={styles.modal}
                 >
                     <View style={styles.modalContainer}>
-                        <Text> Here </Text>
-                        <Button
-                            title="Testing"
-                        />
+                        <Text> An email has been sent to you, put the confirmation code below: </Text>
                         <Formik
                             initialValues={{confirmCode:''}}
                             onSubmit={values => this.handleSubmit(values, this.state.username)}

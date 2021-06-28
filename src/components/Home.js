@@ -20,7 +20,12 @@ export default class Home extends Component {
                         onPress={() => this.props.navigation.navigate('EarthWeather')}
                     />
                 </View>
-        
+                <View  style={styles.button}>
+                    <Button
+                        title="Watch for space weather"
+                        onPress={() => this.props.navigation.navigate('EventWatch')}
+                    />
+                </View>
             </View>
         )
     }

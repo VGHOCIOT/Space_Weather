@@ -8,44 +8,44 @@ import Preview from './Preview';
 import FlatSlide from './FlatSlide';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
-import 'bootstrap/dist/css/bootstrap.min.css'
-import moment from 'moment'
+
+
+
 import { parseISO, format } from 'date-fns'
 
 export default class NasaPhoto extends PureComponent {
     constructor(props){
         super(props)
 
+        // var time = new Date().toLocaleDateString()
+        // var date = time.getDate()
+
         this.state={
             photoData:{},
-            start_date: '',
-            end_date: '',
+            start_date:'',
+            end_date:'',
             start_date_pick: new Date(),
-            end_date_pick: new Date(),
-            lists: [],
-            datesSelected: false
+            end_date_pick: new Date()
         }
-        // this.handleChange = this.handleChange.bind(this)
+        // this.render = this.render.bind(this)
     }
 
     componentDidMount(){
         this.getDates()
+        // var thisdate = this.state.start_date_pick
+        // thisdate = ('0' + (thisdate.getMonth() + 1)).slice(-2) + '/'
+        // + ('0' + thisdate.getDate()).slice(-2) + '/'
+        // + thisdate.getFullYear();
+        // this.setState({
+        //     start_date_pick: parseISO(thisdate)
+        // })
+        // console.log(this.state.start_date_pick)
     }
 
     getDates(){
-        if(!this.state.datesSelected){
-            var end_date = new Date();
-            var start_date = new Date(end_date);
-            start_date.setDate(end_date.getDate() - 6);
-            this.setState({
-                datesSelected: true
-            })
-        }
-        else {
-            var end_date = this.state.end_date_pick;
-            var start_date = this.state.start_date_pick;
-        }
+        var end_date = new Date();
+        var start_date = new Date(end_date);
+        start_date.setDate(end_date.getDate() - 6);
         end_date = end_date.toLocaleDateString("fr-CA",{year:"numeric",month:"2-digit", day:"2-digit"});
         start_date = start_date.toLocaleDateString("fr-CA",{year:"numeric",month:"2-digit", day:"2-digit"});
         this.setState({
@@ -63,51 +63,47 @@ export default class NasaPhoto extends PureComponent {
         .then(response => response.json())
         .then(data =>{
             const newArr = [];
-            const screenWidth = Math.round(Dimensions.get('window').width)
             Object.keys(data).map( (key,index)=>{
                 newArr.push(data[key]);
             });
             this.setState({
-                photoData: newArr,
-                lists: [
-                    <FlatSlide
-                        data={newArr}
-                        width={screenWidth}
-                        seperatorWidth={10}
-                        indicator
-                        indicatorActiveWidth={40}
-                        indicatorContainerStyle={{position:'absolute', bottom: 20}}
-                        // containerContentStyle={styles.contentStyle}
-                    />,...this.state.lists 
-                ]
+                photoData: newArr
             })
         })
+        // console.log(url)
     }
 
+    updateDates(){
+
+    }
+    // handleDateChange = (date) => {
+    //     this.setState({ start_date_pick: date }, () => {
+    //         console.log(this.state.start_date_pick)
+    //     })
+    // }
+
     render(){
-        // console.log(this.state.lists)
-        // console.log(this.state.photoData)
-        // console.log(moment())
+        const screenWidth = Math.round(Dimensions.get('window').width)
+        console.log(this.state.start_date_pick)
         // var thisdate = this.state.start_date_pick
         // thisdate = ('0' + (thisdate.getMonth() + 1)).slice(-2) + '/'
         // + ('0' + thisdate.getDate()).slice(-2) + '/'
         // + thisdate.getFullYear();
         // console.log(thisdate)
         // console.log(new Date)
-        // var curDate = new Date()
-        // var year = curDate.getFullYear()
-        // var month = (curDate.getMonth() + 1)
-        // var day = curDate.getDay()
-        // var currentDate = curDate.toLocaleDateString("en-US");
+        var curDate = new Date()
+        var year = curDate.getFullYear()
+        var month = (curDate.getMonth() + 1)
+        var day = curDate.getDay()
+        var currentDate = curDate.toLocaleDateString("en-US");
 
-        // var firstDate = new Date(2015, 0, 1)
-        // year = firstDate.getFullYear()
-        // month = firstDate.getMonth() + 1
-        // day = firstDate.getDay()
-        // var minDate = firstDate.toLocaleDateString("en-US");
+        var firstDate = new Date(2015, 0, 1)
+        year = firstDate.getFullYear()
+        month = firstDate.getMonth() + 1
+        day = firstDate.getDay()
+        var minDate = firstDate.toLocaleDateString("en-US");
         // // console.log(minDate)
         // console.log(currentDate)
- 
         if (!this.state.photoData) return <React.Fragment/>;
 
         return (
@@ -115,45 +111,38 @@ export default class NasaPhoto extends PureComponent {
                 <ScrollView >
                     <View style={styles.searchBar}>
                         <Text> Start Date: </Text>
-                        <DatePicker
-                            style={styles.datePick}
-                            selected={this.state.start_date_pick}
-                            minmDate={new Date(2015, 0, 1)}
-                            maxDate={new Date()}
-                            onChange={ (selected) => {
-                                this.setState({ start_date_pick: selected})
-                            }}
+                        <DateTimePicker
+                        style={styles.datePick}
+                        value={this.state.start_date_pick}
+                        minimumDate={firstDate}
+                        maximumDate={curDate}
+                        mode="date"
+                        display="calendar"
+                        onChange={ (event, value) => {
+                            this.setState({ start_date_pick: value})
+                        }}
                         />
                         <Text> End Date: </Text>
-                        <DatePicker
+                        <DateTimePicker
                             style={styles.datePick}
-                            selected={this.state.end_date_pick}
-                            minmDate={new Date(2015, 0, 1)}
-                            maxDate={new Date()}
-                            onChange={ (selected) => {
-                                this.setState({ end_date_pick: selected})
+                            value={this.state.end_date_pick}
+                            minimumDate={firstDate}
+                            maximumDate={curDate}
+                            mode="date"
+                            display="calendar"
+                            onChange={ (event, value) => {
+                                this.setState({ end_date_pick: value})
                             }}
                         />
                     </View>
                     <Button
                         style={styles.button}
                         title="Submit"
-                        onPress={() => 
-                            this.getDates()
-                        }
+                        onPress={this.updateDates()}
                     />
                     <SafeAreaView style={styles.separator}>
                         <ScrollView>
-                            {/* {this.state.lists} */}
-                            {/* {renderArr()} */}
-                            {this.state.lists.map((item, idx) => {
-                                return(
-                                    <View key={idx}>
-                                        {item}
-                                    </View>
-                                )
-                            })}
-                            {/* <View>
+                            <View>
                                 <FlatSlide
                                     data={this.state.photoData}
                                     width={screenWidth}
@@ -163,7 +152,7 @@ export default class NasaPhoto extends PureComponent {
                                     indicatorContainerStyle={{position:'absolute', bottom: 20}}
                                     // containerContentStyle={styles.contentStyle}
                                 />
-                            </View> */}
+                            </View>
                         </ScrollView>
                     </SafeAreaView>
                 </ScrollView>
